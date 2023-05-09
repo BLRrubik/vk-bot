@@ -55,7 +55,8 @@ func (bot *Bot) receiveOtherMenuCommands(obj events.MessageNewObject, user *User
 
 		return
 	case "TIME":
-		messageToSend.Message(time.Now().Format("02-01-2006 15:04:05"))
+		loc, _ := time.LoadLocation("Europe/Moscow")
+		messageToSend.Message(time.Now().In(loc).Format("02-01-2006 15:04:05"))
 		bot.SendMessage(messageToSend.Params)
 
 		bot.sendOtherMenu(obj, user)
